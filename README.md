@@ -1,30 +1,11 @@
-# my-app
+# vue-shopping的项目
 
-> A Vue.js project
+# 安装element-ui
+    npm i element-ui -S  
 
-## Build Setup
+# 接口文档在线
+    https://shop-api.circle.ink/
 
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-
-# run unit tests
-npm run unit
-
-# run e2e tests
-npm run e2e
-
-# run all tests
-npm test
-```
-
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+# 编程式导航 ：就是通过js代码实现的路由跳转
+    router：路由跳转  route:接受参数
+    this.$router.push("/home")
