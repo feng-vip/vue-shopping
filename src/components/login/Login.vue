@@ -17,13 +17,12 @@
     </el-row>
 </template>
 <script>
-    import axios from 'axios'
   export default {
     data() {
       return {
         loginFrom: {
-          username: '',
-          password: ''
+          username: 'admin',
+          password: '123456'
         },
         rules: {
           username: [
@@ -40,9 +39,9 @@
     methods: {
     //  登录
         async login(){
-            let res=await axios.post("http://localhost:8888/api/private/v1/login",this.loginFrom)
+            let res=await this.$http.post("/login",this.loginFrom)
             console.log(res)
-            let {meta,data} = res.data
+            let {meta,data} = res
             if(meta.status == 200){
                 console.log(meta.msg)
                 // 保存token

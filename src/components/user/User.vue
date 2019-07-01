@@ -30,7 +30,6 @@
 </template>
 
 <script>
-import axios from "axios"
 export default {
      data() {
         return {
@@ -42,7 +41,7 @@ export default {
     },
     methods:{
         async getUserList(){
-            let res = await axios.get("http://localhost:8888/api/private/v1/users",{
+            let res = await this.$http.get("/users",{
                 params:{
                     pagenum:1,
                     pagesize:3
@@ -51,15 +50,7 @@ export default {
                     Authorization:localStorage.getItem("myToken")
                 }
             })
-            // create_time: 1486720211
-            // email: "adsfad@qq.com"
-            // id: 500
-            // mg_state: true
-            // mobile: "12345678"
-            // role_name: "超级管理员"
-            // username: "admin"
-            console.log(res.data)
-            let {meta,data} = res.data
+            let {meta,data} = res
             if(meta.status == 200){
                 this.userList = data.users
             }
