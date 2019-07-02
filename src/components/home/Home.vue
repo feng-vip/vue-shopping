@@ -17,14 +17,17 @@
                     <el-submenu index="1">
                       <template slot="title">
                         <i class="el-icon-location"></i>
-                        <span>用户信息</span>
+                        <span>用户管理</span>
                       </template>
-                        <el-menu-item index="home/user">
+                      <router-link to="home/user">
+                        <el-menu-item index="1-1">
                          <template slot="title">
                           <i class="el-icon-menu"></i>
                           <span>用户列表</span>
                         </template>
                        </el-menu-item>
+                      </router-link>
+                        
                     </el-submenu>
                     <el-submenu index="2">
                       <template slot="title">
@@ -73,7 +76,7 @@ export default {
   }
   
   .el-aside {
-    background-color: #D3DCE6;
+    background-color: #333;
     color: #333;
     /* text-align: center; */
     line-height: 200px;
