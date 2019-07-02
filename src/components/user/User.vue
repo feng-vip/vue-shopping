@@ -43,7 +43,7 @@
                 <!-- 自定义表格列 -->
                 <template slot-scope="scope">
                     <el-button type="primary" size="mini" plain icon="el-icon-edit" circle></el-button>
-                    <el-button type="primary" size="mini" plain icon="el-icon-delete" circle></el-button>
+                    <el-button type="primary" size="mini" plain icon="el-icon-delete" circle @click="delUserMsg(scope.row.id)"></el-button>
                     <el-button type="success" size="mini" plain icon="el-icon-check" >分配角色</el-button>
                 </template>
             </el-table-column>
@@ -159,11 +159,54 @@ export default {
             this.$refs.addUserForm.resetFields();
         },
 
+        // 删除用户
+        delUserMsg(id){
+            this.$confirm('您确认要删除该用户?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    this.$http.delete(`/users/${id}`).then(res=>{
+                        let{meta} = res
+                        console.log(res)
+                        if(meta.status == 200){
+                            this.$message({
+                                type: 'success',
+                                message: '删除成功!',
+                                duration:1000
+                            });
+                        }
+                        this.getUserList();
+                        this.curPage = 1
+                    })
+                    
+                }).catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: '已取消删除'
+                    });          
+            });
+            
+        },
         // 验证添加用户的规则
         valideAddUserRule(){
             this.$refs.addUserForm.validate(valid=>{
                 if(valid){
-                    console.log("验证success")
+                    this.$http.post("/users",this.addUserForm).then(res=>{
+                        let {meta} = res
+                        if(meta.status === 201){
+                            // 1.关闭对话框，并重置表单
+                            this.addUserSwitch=false;
+                            this.$message({
+                                type:"success",
+                                message:"添加用户成功",
+                                duration:1000
+                            })
+                            // 2.刷新用户列表
+                            this.getUserList()
+                            this.curPage = 1
+                        }
+                    })
                 }else{
                     console.log("error")
                 }
